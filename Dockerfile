@@ -19,7 +19,7 @@ RUN ./gradlew bootJar -x test --no-daemon
 #stage 2: run
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
-COPY --from=build /app/build/libs/*.jar app.jar
+COPY --from=builder /app/build/libs/*.jar app.jar
 # Security: Run as non-root user
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
